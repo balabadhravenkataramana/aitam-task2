@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, monospace;
+            margin: 50px;
+            background-color: #f7f9f4;
+        }
+        form {
+            max-width: 500px; 
+            margin: auto;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 7, 6, 0.1);
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            width: auto;
+        }
+        .form-actions {
+            text-align: center;
+        }
+        button {
+            padding: 9px 18px;
+            background: #9abc67;
+            color: rgba(24, 24, 165, 0.911);
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #476d0d;
+            
+        }
+    </style>
+</head>
+<body>
+    <form action="/submit_registration form" method="POST" enctype="multipart/form-data">
+        <h2>This Is Event Registration Form</h2>
+        <fieldset>
+            <!-- Personal Details -->
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="village">village</label>
+            <input type="village" id="village" name="village" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="parent name">Parent name</label>
+            <input type="tel" id="parent name" name="parent name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="parent number">Parent number</label>
+            <input type="tel" id="parent number" name="parent number" required>
+        </div>
+
+        <!-- Accommodation Details about students -->
+         <div class="form-group">
+            <label>Accommodation Type</label>
+            <input type="radio" id="day_scholar" name="accommodation" value="Day Scholar" required>
+            <label for="day_scholar">Day Scholar</label>
+
+        <input type="radio" id="hosteller" name="accommodation" value="Hosteller">
+            <label for="hosteller">Hosteller</label>
+
+            <div class="form-group">
+                <label for="hostel name">hostel name</label>
+                <input type="tel" id="hostel name"  name="hostel name" required>
+            </div>
+
+            
+
+            <div class="form-group">
+                <label for="hostel fees">first block fees</label>
+                <input type="tel" id="first block fees" name="first block fees" required>
+            </div>
+
+            <div class="form-group">
+                <label for="second  block fees">second block fees</label>
+                <input type="tel" id=" second block fees" name="second  block fees" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nepal block fees">third block fees</label>
+                <input type="tel" id=" third block fees" name="third block fees" required>
+            </div>
+
+            <input type="radio" id="first block" name="accommodation" value="first block">
+            <label for="first block">first block</label>
+
+            <input type="radio" id="second block" name="accommodation" value="second block">
+            <label for="second block">second block</label>
+
+
+            <input type="radio" id="third block" name="accommodation" value="third block">
+            <label for="third block">third block</label>
+
+            <div class="form-group">
+                <label for="room no">room no</label>
+                <input type="tel" id="room no"  name="room no" required>
+            </div>
+
+            
+
+            
+            <input type="radio" id="fees paid (yes)" name="accommodation" value="fees paid(yes)">
+            <label for="fees paid (yes)">fees paid(yes)</label>
+
+            <input type="radio" id="fees paid (no)" name="accommodation" value="fees paid(no)">
+            <label for="fees paid (no)">fees paid(no)</label>
+
+            <div class="form-group">
+                <label for="fees paid receipt no">fees paid receipt no</label>
+                <input type="tel" id="fees paid receipt no"  name="fees paid receipt no" required>
+            </div>
+
+            <div class="form-group">
+                <label for="remaining fees">remaining fees</label>
+                <input type="tel" id="remaining fees"  name="remaining fees" required>
+            </div>
+               
+               
+                <form>
+                   <div class="form-group">
+                       <label for="username">Username:</label>
+                       <input type="text" class="form-control" id="username" placeholder="Enter username">
+                   </div>
+                   <div class="form-group">
+                       <label for="password">Password:</label>
+                       <input type="password" class="form-control" id="password" placeholder="Enter password">
+                   </div>
+                   <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                
+                
+                
+                
+               
+
+        <!-- Pass Collection  about students-->
+        <div class="form-group">
+            <label for="pass_collection">Pass Collection Method</label>
+            <select id="pass_collection" name="pass_collection" required>
+                <option value="self">Self</option>
+                <option value="courier">Courier</option>
+            </select>
+        </div>
+
+        <!-- File Upload -->
+        <div class="form-group">
+            <label for="file_upload">Upload Supporting Documents (if any)</label>
+            <input type="file" id="file_upload" name="file_upload">
+        </div>
+
+        <!-- Additional Information -->
+        <div class="form-group">
+            <label for="comments">Additional Comments</label>
+            <textarea id="comments" name="comments" rows="4"></textarea>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <button type="submit">Register</button>
+        </div>
+    </form>
+</body>
+</html>
+        </fieldset>
+
+        
