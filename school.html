@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Career Guidance Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background-color: #f0f4f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #004d99;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #e6f0ff;
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #004d99;
+      font-weight: bold;
+    }
+
+    .hero {
+      background-color: #cce6ff;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 28px;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px;
+      margin: 10px 0;
+      border-left: 5px solid #0073e6;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      color: #004d99;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #004d99;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #004d99;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Career Guidance Portal</h1>
+    <p>For Government School Students</p>
+  </header>
+
+  <nav>
+    <a href="#careers">Careers</a>
+    <a href="#guidance">Guidance</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <h2>Discover Your Future Career</h2>
+    <p>Get the right guidance to choose a better path after school.</p>
+  </section>
+
+  <div class="container" id="careers">
+    <h2>Popular Career Paths</h2>
+
+    <div class="card">
+      <h3>Government Jobs</h3>
+      <p>Opportunities in police, army, railway, banking and teaching. Prepare for competitive exams like SSC, RRB, UPSC.</p>
+    </div>
+
+    <div class="card">
+      <h3>Technical Skills</h3>
+      <p>Learn trades like electrician, plumbing, tailoring, or computer repair through ITI courses after 10th/12th.</p>
+    </div>
+
+    <div class="card">
+      <h3>Higher Education</h3>
+      <p>Pursue degrees like B.A., B.Sc., or diploma courses in engineering, nursing, teaching, and more.</p>
+    </div>
+  </div>
+
+  <div class="container" id="guidance">
+    <h2>Get Personal Guidance</h2>
+    <form onsubmit="submitForm(event)">
+      <div class="form-group">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" required />
+      </div>
+      <div class="form-group">
+        <label for="class">Class:</label>
+        <select id="class" required>
+          <option value="">Select</option>
+          <option value="9">9th</option>
+          <option value="10">10th</option>
+          <option value="11">11th</option>
+          <option value="12">12th</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="interest">Your Interest Area:</label>
+        <textarea id="interest" rows="4" required></textarea>
+      </div>
+      <button type="submit">Request Guidance</button>
+    </form>
+    <p id="response" style="color: green; margin-top: 10px;"></p>
+  </div>
+
+  <div class="container" id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: support@careerportal.in</p>
+    <p>Phone: +91 98765 43210</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Career Guidance Portal. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value;
+      const cls = document.getElementById("class").value;
+      const interest = document.getElementById("interest").value;
+
+      if (name && cls && interest) {
+        document.getElementById("response").innerText = `Thank you, ${name}! Our team will contact you soon regarding your interest in "${interest}".`;
+        document.querySelector("form").reset();
+      } else {
+        document.getElementById("response").style.color = "red";
+        document.getElementById("response").innerText = "Please fill all fields.";
+      }
+    }
+  </script>
+
+</body>
+</html>
