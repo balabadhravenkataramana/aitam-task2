@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prevention - Drug Education Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .prevention-section {
+            padding: 120px 5% 5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .prevention-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .prevention-header h1 {
+            font-size: 3rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .prevention-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #2563eb, #1e40af);
+            border-radius: 2px;
+        }
+
+        .prevention-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .prevention-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prevention-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .prevention-card i {
+            font-size: 3rem;
+            color: #2563eb;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .prevention-card:hover i {
+            transform: scale(1.2);
+        }
+
+        .prevention-card h3 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .prevention-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .lifestyle-section {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .lifestyle-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .lifestyle-header h2 {
+            color: #1e293b;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .lifestyle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .lifestyle-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lifestyle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #2563eb, #1e40af);
+        }
+
+        .lifestyle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .lifestyle-card i {
+            font-size: 2.5rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+
+        .lifestyle-card h3 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .lifestyle-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .support-section {
+            background: linear-gradient(to right, #2563eb, #1e40af);
+            border-radius: 25px;
+            padding: 4rem 3rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2940') center/cover;
+            opacity: 0.1;
+        }
+
+        .support-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .support-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .support-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: #2563eb;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .support-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .prevention-tips {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .tips-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tips-list li:hover {
+            background: #f8fafc;
+            transform: translateX(10px);
+            border-radius: 10px;
+        }
+
+        .tips-list i {
+            color: #2563eb;
+            font-size: 1.5rem;
+            margin-top: 0.2rem;
+        }
+
+        .tip-content h3 {
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .tip-content p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .prevention-section {
+                padding: 100px 1rem 3rem;
+            }
+
+            .prevention-header h1 {
+                font-size: 2rem;
+            }
+
+            .lifestyle-section,
+            .support-section,
+            .prevention-tips {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-shield-heart"></i>
+            DrugEdu
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="information.html">Drug Information</a></li>
+            <li><a href="prevention.html" class="active">Prevention</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <main class="prevention-section">
+        <div class="prevention-header">
+            <h1>Drug Prevention Strategies</h1>
+            <p class="section-description">Learn effective strategies and build healthy habits to prevent substance abuse. Your well-being is our priority.</p>
+        </div>
+
+        <div class="prevention-grid">
+            <div class="prevention-card">
+                <i class="fas fa-brain"></i>
+                <h3>Education</h3>
+                <p>Understanding the risks and consequences of drug use through comprehensive education and awareness programs.</p>
+            </div>
+            <div class="prevention-card">
+                <i class="fas fa-users"></i>
+                <h3>Support System</h3>
+                <p>Building and maintaining strong relationships with family, friends, and support groups.</p>
+            </div>
+            <div class="prevention-card">
+                <i class="fas fa-heart"></i>
+                <h3>Self-Care</h3>
+                <p>Developing healthy coping mechanisms and stress management techniques.</p>
+            </div>
+        </div>
+
+        <div class="lifestyle-section">
+            <div class="lifestyle-header">
+                <h2>Healthy Lifestyle Choices</h2>
+                <p>Incorporate these positive habits into your daily routine</p>
+            </div>
+            <div class="lifestyle-grid">
+                <div class="lifestyle-card">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Physical Activity</h3>
+                    <p>Regular exercise improves mood and reduces stress naturally.</p>
+                </div>
+                <div class="lifestyle-card">
+                    <i class="fas fa-moon"></i>
+                    <h3>Quality Sleep</h3>
+                    <p>Maintain a regular sleep schedule for better mental health.</p>
+                </div>
+                <div class="lifestyle-card">
+                    <i class="fas fa-apple-alt"></i>
+                    <h3>Healthy Diet</h3>
+                    <p>Proper nutrition supports physical and mental well-being.</p>
+                </div>
+                <div class="lifestyle-card">
+                    <i class="fas fa-peace"></i>
+                    <h3>Mindfulness</h3>
+                    <p>Practice meditation and mindfulness for emotional balance.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="prevention-tips">
+            <h2>Essential Prevention Tips</h2>
+            <ul class="tips-list">
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <div class="tip-content">
+                        <h3>Know Your Boundaries</h3>
+                        <p>Set clear personal limits and learn to say no confidently in challenging situations.</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <div class="tip-content">
+                        <h3>Choose Positive Environments</h3>
+                        <p>Surround yourself with supportive people and avoid high-risk situations.</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <div class="tip-content">
+                        <h3>Develop Coping Skills</h3>
+                        <p>Learn healthy ways to manage stress, anxiety, and other emotional challenges.</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <div class="tip-content">
+                        <h3>Seek Help Early</h3>
+                        <p>Don't hesitate to reach out for professional support when needed.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="support-section">
+            <div class="support-content">
+                <h2>Need Support?</h2>
+                <p>Our team is here to help you on your journey to a healthy, drug-free life.</p>
+                <a href="#" class="support-btn">
+                    Get Help Now
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div class="floating-help">
+        <i class="fas fa-question-circle"></i>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-envelope"></i> Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> Email: info@drugedu.org</p>
+                <p><i class="fas fa-phone"></i> Phone: (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4><i class="fas fa-link"></i> Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html"><i class="fas fa-lock"></i> Privacy Policy</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i> Terms of Use</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4><i class="fas fa-share-alt"></i> Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Drug Education Portal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

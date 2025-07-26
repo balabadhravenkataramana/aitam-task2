@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Drug Education Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .resources-section {
+            padding: 120px 5% 5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .resources-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .resources-header h1 {
+            font-size: 3rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .resources-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #2563eb, #1e40af);
+            border-radius: 2px;
+        }
+
+        .emergency-section {
+            background: linear-gradient(to right, #dc2626, #991b1b);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            animation: pulseLight 2s infinite;
+        }
+
+        @keyframes pulseLight {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+
+        .emergency-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .emergency-header i {
+            font-size: 2.5rem;
+        }
+
+        .emergency-header h2 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .emergency-contacts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .emergency-contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .emergency-contact-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .emergency-contact-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .emergency-number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .resource-category {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .resource-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-category h2 {
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resource-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .resource-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .resource-item h3 {
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .resource-item p {
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            transform: translateX(5px);
+            color: #1e40af;
+        }
+
+        .local-resources {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .local-resources h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1e293b;
+            font-size: 2rem;
+        }
+
+        .treatment-centers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .center-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .center-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #2563eb, #1e40af);
+            border-radius: 2px 2px 0 0;
+        }
+
+        .center-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .center-card h3 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .center-info {
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .center-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .center-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .center-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .center-btn.primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .center-btn.secondary {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .center-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .resources-section {
+                padding: 100px 1rem 3rem;
+            }
+
+            .resources-header h1 {
+                font-size: 2rem;
+            }
+
+            .emergency-section,
+            .local-resources {
+                padding: 2rem;
+            }
+
+            .emergency-contacts {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-shield-heart"></i>
+            DrugEdu
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="information.html">Drug Information</a></li>
+            <li><a href="prevention.html">Prevention</a></li>
+            <li><a href="resources.html" class="active">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <main class="resources-section">
+        <div class="resources-header">
+            <h1>Support Resources</h1>
+            <p class="section-description">Access comprehensive support services and resources for drug prevention and recovery.</p>
+        </div>
+
+        <div class="emergency-section">
+            <div class="emergency-header">
+                <i class="fas fa-phone-volume"></i>
+                <h2>Emergency Contacts</h2>
+            </div>
+            <div class="emergency-contacts">
+                <div class="emergency-contact-card">
+                    <h3><i class="fas fa-ambulance"></i> Emergency Services</h3>
+                    <div class="emergency-number">911</div>
+                    <p>For immediate medical emergencies</p>
+                </div>
+                <div class="emergency-contact-card">
+                    <h3><i class="fas fa-phone"></i> Crisis Hotline</h3>
+                    <div class="emergency-number">1-800-662-4357</div>
+                    <p>24/7 confidential support</p>
+                </div>
+                <div class="emergency-contact-card">
+                    <h3><i class="fas fa-comments"></i> Text Support</h3>
+                    <div class="emergency-number">Text "HELP" to 741741</div>
+                    <p>Crisis counseling via text</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="resource-categories">
+            <div class="resource-category">
+                <h2><i class="fas fa-book-medical"></i> Educational Resources</h2>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <h3>Drug Facts & Statistics</h3>
+                        <p>Access comprehensive information about various substances and their effects.</p>
+                        <a href="#" class="resource-link">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li class="resource-item">
+                        <h3>Prevention Guides</h3>
+                        <p>Download guides and materials for drug prevention education.</p>
+                        <a href="#" class="resource-link">
+                            View Guides
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="resource-category">
+                <h2><i class="fas fa-hands-helping"></i> Support Groups</h2>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <h3>Narcotics Anonymous</h3>
+                        <p>Find local NA meetings and support groups in your area.</p>
+                        <a href="#" class="resource-link">
+                            Find Meetings
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li class="resource-item">
+                        <h3>Family Support Groups</h3>
+                        <p>Resources for families affected by substance abuse.</p>
+                        <a href="#" class="resource-link">
+                            Join Group
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="local-resources">
+            <h2>Local Treatment Centers</h2>
+            <div class="treatment-centers">
+                <div class="center-card">
+                    <h3>Recovery Hope Center</h3>
+                    <div class="center-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, City</p>
+                        <p><i class="fas fa-phone"></i> (555) 234-5678</p>
+                        <p><i class="fas fa-clock"></i> Open 24/7</p>
+                    </div>
+                    <div class="center-actions">
+                        <a href="#" class="center-btn primary">
+                            Contact Now
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="#" class="center-btn secondary">
+                            Learn More
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="center-card">
+                    <h3>New Beginnings Clinic</h3>
+                    <div class="center-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 456 Oak Avenue, City</p>
+                        <p><i class="fas fa-phone"></i> (555) 876-5432</p>
+                        <p><i class="fas fa-clock"></i> 8 AM - 8 PM</p>
+                    </div>
+                    <div class="center-actions">
+                        <a href="#" class="center-btn primary">
+                            Contact Now
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="#" class="center-btn secondary">
+                            Learn More
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="floating-help">
+        <i class="fas fa-question-circle"></i>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-envelope"></i> Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> Email: info@drugedu.org</p>
+                <p><i class="fas fa-phone"></i> Phone: (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4><i class="fas fa-link"></i> Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html"><i class="fas fa-lock"></i> Privacy Policy</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i> Terms of Use</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4><i class="fas fa-share-alt"></i> Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Drug Education Portal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

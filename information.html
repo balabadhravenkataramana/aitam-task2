@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drug Information - Drug Education Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .drug-info-section {
+            padding: 120px 5% 5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .drug-info-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .drug-info-header h1 {
+            font-size: 3rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .drug-info-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #2563eb, #1e40af);
+            border-radius: 2px;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .drug-category {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .drug-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #2563eb, #1e40af);
+        }
+
+        .drug-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .drug-category h2 {
+            color: #2563eb;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2rem;
+        }
+
+        .drug-category h2 i {
+            font-size: 1.8rem;
+        }
+
+        .drug-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .drug-card {
+            background: rgba(248, 250, 252, 0.8);
+            padding: 2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .drug-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .drug-card h3 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .warning-label.moderate {
+            background: #f59e0b;
+        }
+
+        .warning-label.extreme {
+            background: #7f1d1d;
+        }
+
+        .effects-list {
+            list-style: none;
+        }
+
+        .effects-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .effects-list li::before {
+            content: "\f111";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #2563eb;
+            font-size: 0.5rem;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .learn-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .learn-more-btn:hover {
+            background: #1e40af;
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-help {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #2563eb;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .floating-help:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .drug-info-section {
+                padding: 100px 1rem 3rem;
+            }
+
+            .drug-category {
+                padding: 2rem;
+            }
+
+            .drug-info-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-shield-heart"></i>
+            DrugEdu
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="information.html" class="active">Drug Information</a></li>
+            <li><a href="prevention.html">Prevention</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <main class="drug-info-section">
+        <div class="drug-info-header">
+            <h1>Drug Information Database</h1>
+            <p class="section-description">Learn about different types of drugs, their effects, and potential risks. Knowledge is the first step towards prevention and safety.</p>
+        </div>
+
+        <div class="drug-category">
+            <h2><i class="fas fa-bolt"></i> Stimulants</h2>
+            <div class="drug-grid">
+                <div class="drug-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Cocaine</h3>
+                    <span class="warning-label">
+                        <i class="fas fa-exclamation-circle"></i>
+                        High Risk
+                    </span>
+                    <ul class="effects-list">
+                        <li>Increased heart rate and blood pressure</li>
+                        <li>Euphoria and energy</li>
+                        <li>Risk of heart attack and stroke</li>
+                        <li>Highly addictive</li>
+                    </ul>
+                    <a href="#" class="learn-more-btn">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="drug-card">
+                    <h3><i class="fas fa-skull-crossbones"></i> Methamphetamine</h3>
+                    <span class="warning-label">
+                        <i class="fas fa-exclamation-circle"></i>
+                        High Risk
+                    </span>
+                    <ul class="effects-list">
+                        <li>Intense euphoria</li>
+                        <li>Severe dental problems</li>
+                        <li>Mental health issues</li>
+                        <li>Extremely addictive</li>
+                    </ul>
+                    <a href="#" class="learn-more-btn">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="drug-category">
+            <h2><i class="fas fa-arrow-down"></i> Depressants</h2>
+            <div class="drug-grid">
+                <div class="drug-card">
+                    <h3><i class="fas fa-wine-bottle"></i> Alcohol</h3>
+                    <span class="warning-label moderate">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Moderate to High Risk
+                    </span>
+                    <ul class="effects-list">
+                        <li>Impaired judgment</li>
+                        <li>Liver damage</li>
+                        <li>Addiction potential</li>
+                        <li>Social and health impacts</li>
+                    </ul>
+                    <a href="#" class="learn-more-btn">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="drug-card">
+                    <h3><i class="fas fa-pills"></i> Benzodiazepines</h3>
+                    <span class="warning-label">
+                        <i class="fas fa-exclamation-circle"></i>
+                        High Risk
+                    </span>
+                    <ul class="effects-list">
+                        <li>Sedation and relaxation</li>
+                        <li>Memory problems</li>
+                        <li>Physical dependence</li>
+                        <li>Withdrawal risks</li>
+                    </ul>
+                    <a href="#" class="learn-more-btn">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="drug-category">
+            <h2><i class="fas fa-syringe"></i> Opioids</h2>
+            <div class="drug-grid">
+                <div class="drug-card">
+                    <h3><i class="fas fa-skull"></i> Heroin</h3>
+                    <span class="warning-label extreme">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Extreme Risk
+                    </span>
+                    <ul class="effects-list">
+                        <li>Intense euphoria</li>
+                        <li>Respiratory depression</li>
+                        <li>Overdose risk</li>
+                        <li>Severe addiction</li>
+                    </ul>
+                    <a href="#" class="learn-more-btn">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="drug-card">
+                    <h3><i class="fas fa-prescription"></i> Prescription Opioids</h3>
+                    <span class="warning-label">
+                        <i class="fas fa-exclamation-circle"></i>
+                        High Risk
+                    </span>
+                    <ul class="effects-list">
+                        <li>Pain relief</li>
+                        <li>Physical dependence</li>
+                        <li>Addiction potential</li>
+                        <li>Overdose risk</li>
+                    </ul>
+                    <a href="#" class="learn-more-btn">
+                        Learn More
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="floating-help">
+        <i class="fas fa-question-circle"></i>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-envelope"></i> Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> Email: info@drugedu.org</p>
+                <p><i class="fas fa-phone"></i> Phone: (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4><i class="fas fa-link"></i> Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html"><i class="fas fa-lock"></i> Privacy Policy</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i> Terms of Use</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4><i class="fas fa-share-alt"></i> Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Drug Education Portal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

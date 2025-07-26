@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Drug Education Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .about-section {
+            padding: 120px 5% 5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .about-header h1 {
+            font-size: 3rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #2563eb, #1e40af);
+            border-radius: 2px;
+        }
+
+        .mission-section {
+            background: white;
+            border-radius: 25px;
+            padding: 4rem;
+            margin-bottom: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2940') center/cover;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .mission-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .mission-section h2 {
+            color: #1e293b;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .mission-section p {
+            color: #64748b;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: #2563eb;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover i {
+            transform: scale(1.2);
+        }
+
+        .value-card h3 {
+            color: #1e293b;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            color: #64748b;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .team-section {
+            margin-bottom: 4rem;
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .team-header h2 {
+            color: #1e293b;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .member-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .member-info h3 {
+            color: #1e293b;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: #2563eb;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .member-bio {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links-member {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-link-member {
+            color: #64748b;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link-member:hover {
+            color: #2563eb;
+            transform: translateY(-3px);
+        }
+
+        .partners-section {
+            background: white;
+            border-radius: 25px;
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .partners-header {
+            margin-bottom: 3rem;
+        }
+
+        .partners-header h2 {
+            color: #1e293b;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .partner-logo {
+            max-width: 150px;
+            height: auto;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .about-section {
+                padding: 100px 1rem 3rem;
+            }
+
+            .about-header h1 {
+                font-size: 2rem;
+            }
+
+            .mission-section,
+            .partners-section {
+                padding: 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-shield-heart"></i>
+            DrugEdu
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="information.html">Drug Information</a></li>
+            <li><a href="prevention.html">Prevention</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+        </ul>
+    </nav>
+
+    <main class="about-section">
+        <div class="about-header">
+            <h1>About Drug Education Portal</h1>
+            <p class="section-description">Dedicated to promoting awareness and prevention through education.</p>
+        </div>
+
+        <div class="mission-section">
+            <div class="mission-content">
+                <h2>Our Mission</h2>
+                <p>We are committed to providing comprehensive, accurate, and accessible information about drug education and prevention. Our goal is to empower individuals with knowledge and resources to make informed decisions about their health and well-being.</p>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fas fa-book-reader"></i>
+                        <h3>Education</h3>
+                        <p>Providing accurate and up-to-date information about drug awareness and prevention.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-hands-helping"></i>
+                        <h3>Support</h3>
+                        <p>Offering resources and assistance to those affected by substance abuse.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Prevention</h3>
+                        <p>Promoting strategies and tools for preventing drug abuse.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Community</h3>
+                        <p>Building a supportive network for individuals and families.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <div class="team-header">
+                <h2>Our Team</h2>
+                <p class="section-description">Meet the dedicated professionals behind our mission.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2940" alt="Dr. Sarah Johnson" class="member-image">
+                    <div class="member-info">
+                        <h3>Dr. Sarah Johnson</h3>
+                        <div class="member-role">Executive Director</div>
+                        <p class="member-bio">With over 15 years of experience in addiction medicine, Dr. Johnson leads our team with expertise and compassion.</p>
+                        <div class="social-links-member">
+                            <a href="#" class="social-link-member"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link-member"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2940" alt="Michael Chen" class="member-image">
+                    <div class="member-info">
+                        <h3>Michael Chen</h3>
+                        <div class="member-role">Prevention Specialist</div>
+                        <p class="member-bio">Michael specializes in developing effective prevention programs for schools and communities.</p>
+                        <div class="social-links-member">
+                            <a href="#" class="social-link-member"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link-member"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=2940" alt="Dr. Maria Rodriguez" class="member-image">
+                    <div class="member-info">
+                        <h3>Dr. Maria Rodriguez</h3>
+                        <div class="member-role">Research Director</div>
+                        <p class="member-bio">Dr. Rodriguez leads our research initiatives and ensures all information is evidence-based.</p>
+                        <div class="social-links-member">
+                            <a href="#" class="social-link-member"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link-member"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="partners-section">
+            <div class="partners-header">
+                <h2>Our Partners</h2>
+                <p class="section-description">Working together to create positive change.</p>
+            </div>
+            <div class="partners-grid">
+                <img src="https://placehold.co/200x100/png" alt="Partner 1" class="partner-logo">
+                <img src="https://placehold.co/200x100/png" alt="Partner 2" class="partner-logo">
+                <img src="https://placehold.co/200x100/png" alt="Partner 3" class="partner-logo">
+                <img src="https://placehold.co/200x100/png" alt="Partner 4" class="partner-logo">
+            </div>
+        </div>
+    </main>
+
+    <div class="floating-help">
+        <i class="fas fa-question-circle"></i>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-envelope"></i> Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> Email: info@drugedu.org</p>
+                <p><i class="fas fa-phone"></i> Phone: (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4><i class="fas fa-link"></i> Quick Links</h4>
+                <ul>
+                    <li><a href="privacy.html"><i class="fas fa-lock"></i> Privacy Policy</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i> Terms of Use</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4><i class="fas fa-share-alt"></i> Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Drug Education Portal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 
