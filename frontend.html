@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Digital Bridge - Orphan Support Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #005fa3;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.5rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 1rem;
+    }
+    .form-section, .list-section {
+      background: white;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="number"], input[type="file"], select {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 0.7rem 1.2rem;
+      background: #005fa3;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 0.5rem; /* Added margin-top for buttons */
+    }
+    button:hover {
+      background: #004a82;
+    }
+    .orphan-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .orphan-card img {
+      max-width: 100%;
+      height: auto; /* Ensure image scales proportionally */
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+    }
+    .orphan-id {
+      font-size: 0.8rem;
+      color: #888;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+      gap: 0.5rem; /* Spacing between buttons */
+      margin-top: 1rem;
+      margin-bottom: 1rem; /* Added margin for better spacing */
+    }
+    #search, #sortOption {
+        margin-bottom: 1rem; /* Spacing for search and sort inputs */
+    }
+  </style>
+</head>
+<body>
+  <header>Digital Bridge - Connect Orphans to Care</header>
+
+  <div class="container">
+    <section class="form-section">
+      <h2>Upload Orphan Details</h2>
+      <form id="orphanForm">
+        <div class="form-group">
+          <label for="name">Child's Name:</label>
+          <input type="text" id="name" required />
+        </div>
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input type="number" id="age" min="0" required />
+        </div>
+        <div class="form-group">
+          <label for="location">Location Found:</label>
+          <input type="text" id="location" required />
+        </div>
+        <div class="form-group">
+          <label for="photo">Upload Photo:</label>
+          <input type="file" id="photo" accept="image/*" required />
+          <img id="previewImage" style="max-width: 100%; display: none; margin-top: 1rem;" />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <section class="list-section">
+      <h2>Submitted Reports</h2>
+      <input type="text" id="search" placeholder="Search by name, location, or ID..." />
+      <select id="sortOption">
+        <option value="newest">Sort by Newest</option>
+        <option value="oldest">Sort by Oldest</option>
+        <option value="age">Sort by Age</option>
+      </select>
+      <div class="actions">
+        <button onclick="downloadCSV()">Download CSV</button>
+      </div>
+      <div id="orphanList"></div>
+    </section>
+  </div>
+
+  <script>
+    // Initialize orphanData from localStorage or as an empty array
+    let orphanData = JSON.parse(localStorage.getItem('orphans')) || [];
+
+    // --- Photo Preview Functionality ---
+    document.getElementById("photo").addEventListener("change", function () {
+      const file = this.files[0];
+      const previewImage = document.getElementById("previewImage");
+
+      if (file) {
+        // Basic validation for image file type
+        if (!file.type.startsWith('image/')) {
+            alert("Please upload an image file (e.g., .jpg, .png).");
+            this.value = ''; // Clear the input field
+            previewImage.style.display = "none";
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = e => {
+          previewImage.src = e.target.result;
+          previewImage.style.display = "block";
+        };
+        reader.onerror = () => {
+            alert("Failed to read image file.");
+            previewImage.style.display = "none";
+        };
+        reader.readAsDataURL(file);
+      } else {
+          previewImage.style.display = "none"; // Hide preview if no file selected
+      }
+    });
+
+    // --- Form Submission Handler ---
+    document.getElementById("orphanForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent default form submission behavior
+
+      const name = document.getElementById("name").value.trim();
+      const ageInput = document.getElementById("age");
+      const age = parseInt(ageInput.value.trim(), 10); // Parse age as an integer
+      const location = document.getElementById("location").value.trim();
+      const photoFile = document.getElementById("photo").files[0];
+
+      // Validate all required fields
+      if (!name || !ageInput.value.trim() || !location || !photoFile) {
+        alert("Please fill all required fields.");
+        return;
+      }
+
+      // Validate age to be a positive number
+      if (isNaN(age) || age < 0) {
+        alert("Please enter a valid positive age.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const imageData = e.target.result;
+        // Generate a unique ID for the orphan based on timestamp
+        const orphanId = `ORP-${Date.now()}`;
+        // Create an orphan object with all details, including a timestamp for sorting
+        const orphan = { name, age, location, imageData, orphanId, timestamp: Date.now() };
+
+        // Add the new orphan to the data array
+        orphanData.push(orphan);
+        // Save the updated data to localStorage
+        localStorage.setItem('orphans', JSON.stringify(orphanData));
+
+        // Re-render the list to show the new orphan
+        renderOrphans();
+        // Reset the form and hide the image preview
+        document.getElementById("orphanForm").reset();
+        document.getElementById("previewImage").style.display = "none";
+        alert("Orphan details uploaded successfully!"); // Provide user feedback
+      };
+      reader.onerror = () => {
+          alert("Failed to read image file for submission.");
+      };
+      reader.readAsDataURL(photoFile);
+    });
+
+    // --- Render Orphans Function ---
+    function renderOrphans(filter = "", sort = "newest") {
+      const list = document.getElementById("orphanList");
+      list.innerHTML = ""; // Clear existing list items
+
+      // Filter data based on search input (case-insensitive)
+      let filteredData = orphanData.filter(o =>
+        o.name.toLowerCase().includes(filter.toLowerCase()) ||
+        o.location.toLowerCase().includes(filter.toLowerCase()) ||
+        o.orphanId.toLowerCase().includes(filter.toLowerCase())
+      );
+
+      // Sort data based on selected option
+      if (sort === "newest") {
+        filteredData.sort((a, b) => b.timestamp - a.timestamp); // Newest first
+      } else if (sort === "oldest") {
+        filteredData.sort((a, b) => a.timestamp - b.timestamp); // Oldest first
+      } else if (sort === "age") {
+        filteredData.sort((a, b) => a.age - b.age); // Youngest first
+      }
+
+      // Display a message if no records are found
+      if (filteredData.length === 0) {
+          list.innerHTML = "<p>No reports found matching your criteria.</p>";
+          return;
+      }
+
+      // Create and append orphan cards to the list
+      filteredData.forEach(orphan => {
+        const card = document.createElement("div");
+        card.className = "orphan-card";
+        card.innerHTML = `
+          <img src="${orphan.imageData}" alt="Photo of ${orphan.name}" />
+          <p><strong>Name:</strong> ${orphan.name}</p>
+          <p><strong>Age:</strong> ${orphan.age}</p>
+          <p><strong>Location:</strong> ${orphan.location}</p>
+          <p class="orphan-id"><strong>ID:</strong> ${orphan.orphanId}</p>
+          <div class="actions">
+            <button onclick="printOrphan('${orphan.orphanId}')">Print</button>
+            <a href="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(`ID: ${orphan.orphanId}\nName: ${orphan.name}\nAge: ${orphan.age}\nLocation: ${orphan.location}`)}&size=120x120" target="_blank" style="text-decoration: none;">
+                <button>Generate QR Code</button>
+            </a>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    // --- Download CSV Function ---
+    function downloadCSV() {
+      if (orphanData.length === 0) {
+          alert("No data to download.");
+          return;
+      }
+      let csv = "Name,Age,Location,ID\n"; // CSV header
+      orphanData.forEach(o => {
+        // Escape commas and double quotes in fields for proper CSV formatting
+        const name = `"${o.name.replace(/"/g, '""')}"`;
+        const location = `"${o.location.replace(/"/g, '""')}"`;
+        csv += `${name},${o.age},${location},${o.orphanId}\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'orphan_reports.csv';
+      document.body.appendChild(a); // Temporarily append to body to enable click
+      a.click();
+      document.body.removeChild(a); // Clean up
+      URL.revokeObjectURL(url); // Release the object URL
+    }
+
+    // --- Print Individual Orphan Report Function ---
+    function printOrphan(id) {
+      const o = orphanData.find(x => x.orphanId === id);
+      if (!o) {
+          alert("Orphan record not found for printing.");
+          return;
+      }
+      const w = window.open('', '_blank', 'width=600,height=600'); // Open in new tab
+      w.document.write(`<html><head><title>Print Orphan Report</title>`);
+      // Add basic styling for the print view
+      w.document.write(`<style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            img { max-width: 100%; height: auto; margin-bottom: 15px; border-radius: 8px; }
+            p { margin-bottom: 8px; font-size: 1.1em; }
+            strong { color: #333; }
+        </style>`);
+      w.document.write(`</head><body>`);
+      w.document.write(`<h2>Orphan Report - ID: ${o.orphanId}</h2>`);
+      w.document.write(`<img src="${o.imageData}" alt="Photo of ${o.name}" /><br>`);
+      w.document.write(`<p><strong>Name:</strong> ${o.name}</p>`);
+      w.document.write(`<p><strong>Age:</strong> ${o.age}</p>`);
+      w.document.write(`<p><strong>Location:</strong> ${o.location}</p>`);
+      w.document.write(`</body></html>`);
+      w.document.close(); // Close the document stream
+      w.print(); // Trigger the print dialog
+    }
+
+    // --- Event Listeners for Search and Sort ---
+    document.getElementById("search").addEventListener("input", function () {
+      // Re-render orphans whenever search input changes
+      renderOrphans(this.value, document.getElementById("sortOption").value);
+    });
+
+    document.getElementById("sortOption").addEventListener("change", function () {
+      // Re-render orphans whenever sort option changes
+      renderOrphans(document.getElementById("search").value, this.value);
+    });
+
+    // --- Initial Render on Page Load ---
+    renderOrphans(); // Display any existing data from localStorage when the page loads
+  </script>
+</body>
+</html>
